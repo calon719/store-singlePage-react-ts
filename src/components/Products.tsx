@@ -30,7 +30,7 @@ function Products() {
     const json = await res.json()
     if (json.status) {
       setProductsData(json.products)
-      setFilteredProducts(productsData)
+      setFilteredProducts(json.products)
       renderCategorySelector(json.products)
     }
   }
