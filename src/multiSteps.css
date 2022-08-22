@@ -1,0 +1,30 @@
+.multiSteps-item:not(:last-child) {
+  position: relative;
+}
+
+.multiSteps-item:not(:last-child):after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 0;
+  width: 0;
+  border-width: 8px;
+  border-color: #ffffff;
+  border-style: solid;
+  border-top-color: #000000;
+}
+
+@media(min-width: 768px) {
+  .multiSteps-item:not(:last-child):after {
+    content: '';
+    position: absolute;
+    bottom: 7rem;
+    left: 150%;
+    border-width: 8px;
+    border-color: #ffffff;
+    border-style: solid;
+    border-left-color: #000000;
+  }
+}
