@@ -66,7 +66,7 @@ function Comments() {
   const commentsData2 = commentsData.filter((item, i) => i >= 3 && i < 6)
 
   return (
-    <div className="bg-secondary">
+    <div className="bg-secondary" id="comments">
       <div className="container pt-15 pb-20">
         <Title title={'好評推薦'} color={'white'} />
         <ul>

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
+import API from './global/constracts'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Comparison from './components/Comparison'
 import Comments from './components/Comments'
 import Delivery from './components/Delivery'
 import Cart from './components/Cart'
-import API from './global/constracts'
+import Order from './components/Order'
 
 function App() {
   const [cartData, setCartData] = useState({ carts: [], finalTotal: 0 })
@@ -30,6 +31,7 @@ function App() {
       <Comments />
       <Delivery fetchCartData={fetchCartData} carts={cartData} />
       <Cart carts={cartData} setCartData={setCartData} />
+      <Order fetchCartData={fetchCartData} />
     </>
   )
 }
