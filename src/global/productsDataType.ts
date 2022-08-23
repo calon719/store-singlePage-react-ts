@@ -1,4 +1,4 @@
-type productsDataType = {
+type productDataType = {
   category: string;
   description: string;
   id: string;

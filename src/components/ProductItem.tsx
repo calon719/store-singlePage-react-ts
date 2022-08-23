@@ -1,10 +1,53 @@
-import productsDataType from './../global/productsDataType'
+import productDataType from './../global/productsDataType'
+import API from './../global/constracts'
+import { TCarts } from './../global/cartDataType'
 
 type productItemProps = {
-  product: productsDataType;
+  product: productDataType;
+  fetchCartData: Function;
+  carts: TCarts;
 }
 
-function ProductItem({ product }: productItemProps) {
+function ProductItem({ product, fetchCartData, carts }: productItemProps) {
+  async function addCart() {
+    const cart = carts.carts.find(cart => cart.product.id === product.id)
+    let method = 'POST'
+    let productId = product.id
+
+    type TCartData = {
+      productId?: string;
+      id?: string;
+      quantity: number;
+    }
+
+    const data: TCartData = {
+      quantity: 1
+    }
+
+    if (cart) {
+      method = 'PATCH'
+      data.quantity += cart.quantity
+      data.id = cart.id
+    } else {
+      data.productId = product.id
+    }
+
+    const { CARTS_API } = API
+    const res = await fetch(CARTS_API, {
+      method,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ data })
+    })
+
+    const json = await res.json()
+
+    if (json.status) {
+      fetchCartData()
+    }
+  }
+
   return (
     <li>
       <div
@@ -18,6 +61,7 @@ function ProductItem({ product }: productItemProps) {
       <button
         className="bg-black text-white text-center mb-2 w-full py-3 hover:opacity-70"
         type="button"
+        onClick={addCart}
       >加入購物車</button>
       <p className="text-xl">{product.title}</p>
       <p className="text-xl line-through">NT${product.origin_price.toLocaleString()}</p>

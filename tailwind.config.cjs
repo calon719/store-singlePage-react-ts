@@ -12,10 +12,14 @@ module.exports = {
       spacing: {
         13: '3.25rem',
         15: '3.75rem',
+        17: '4.25rem',
         18: '4.5rem',
         22: '5.5rem',
         35: '8.75rem',
         105: '26.25rem'
+      },
+      minWidth: {
+        230: '57.5rem'
       },
       fontSize: {
         '3xl': ['1.75rem', '2.25rem'],

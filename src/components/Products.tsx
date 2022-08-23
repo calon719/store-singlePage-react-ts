@@ -2,15 +2,21 @@ import { useState, useEffect } from 'react'
 import CategorySelector from './CategorySelector'
 import ProductsList from './ProductsList'
 import API from './../global/constracts'
-import productsDataType from './../global/productsDataType'
+import productDataType from './../global/productsDataType'
+import { TCarts } from './../global/cartDataType'
 
-function Products() {
+type productsProps = {
+  fetchCartData: Function;
+  carts: TCarts;
+}
+
+function Products({ fetchCartData, carts }: productsProps) {
   const [productsData, setProductsData] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
   const [categories, setCategories] = useState<Array<string>>([])
   const [selectedCategory, setSelectedCategory] = useState<string>('全部')
 
-  function renderCategorySelector(data: Array<productsDataType>) {
+  function renderCategorySelector(data: Array<productDataType>) {
     const categoriesList: Array<string> = []
 
     data.forEach(product => {
@@ -43,7 +49,7 @@ function Products() {
     if (selectedCategory === '全部') {
       setFilteredProducts(productsData)
     } else {
-      const newProducts = productsData.filter((product: productsDataType) => product.category === selectedCategory)
+      const newProducts = productsData.filter((product: productDataType) => product.category === selectedCategory)
       setFilteredProducts(newProducts)
     }
   }, [selectedCategory])
@@ -57,7 +63,7 @@ function Products() {
           setSelectedCategory={setSelectedCategory}
         />
       </div>
-      <ProductsList products={filteredProducts} />
+      <ProductsList products={filteredProducts} fetchCartData={fetchCartData} carts={carts} />
     </>
   )
 }
