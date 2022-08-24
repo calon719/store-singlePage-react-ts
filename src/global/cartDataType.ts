@@ -8,10 +8,10 @@ type TCart = {
 
 type TCarts = {
   finalTotal: number;
-  total: number;
-  status: boolean;
+  total?: number;
+  status?: boolean;
   carts: Array<TCart>;
   message?: string;
 }
 
-export { TCarts, TCart }
+export type { TCarts, TCart }

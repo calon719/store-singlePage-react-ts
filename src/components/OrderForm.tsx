@@ -19,7 +19,17 @@ function OrderForm({ fetchCartData }: orderFormProps) {
     payment: 'ATM'
   })
 
-  function inputContent(e) {
+  function inputContent(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value, id } = e.target
+
+    const newData: TOrderData = {
+      ...orderData
+    }
+    newData[id] = value
+    setOrderData(newData)
+  }
+
+  function changeContent(e: React.ChangeEvent<HTMLSelectElement>) {
     const { value, id } = e.target
 
     const newData: TOrderData = {
@@ -104,8 +114,7 @@ function OrderForm({ fetchCartData }: orderFormProps) {
           id="payment"
           className="w-full bg-white border rounded py-2 px-3 hover:cursor-pointer"
           value={orderData.payment}
-          onChange={inputContent}
-          onInput={inputContent}
+          onChange={changeContent}
         >
           <option value="" disabled>請選擇交易方式</option>
           <option value="ATM">ATM</option>
